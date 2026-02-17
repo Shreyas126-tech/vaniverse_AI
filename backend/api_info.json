@@ -1,0 +1,2121 @@
+{
+  "named_endpoints": {
+    "/interrupt": {
+      "parameters": [],
+      "returns": [],
+      "description": ""
+    },
+    "/lambda": {
+      "parameters": [],
+      "returns": [
+        {
+          "label": "Seed",
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Number"
+        }
+      ],
+      "description": ""
+    },
+    "/audio_src_change": {
+      "parameters": [
+        {
+          "label": "Condition on a melody (optional) File or Mic",
+          "parameter_name": "choice",
+          "parameter_has_default": true,
+          "parameter_default": "file",
+          "type": {
+            "enum": [
+              "file",
+              "mic"
+            ],
+            "title": "Radio",
+            "type": "string"
+          },
+          "python_type": {
+            "type": "Literal['file', 'mic']",
+            "description": ""
+          },
+          "component": "Radio",
+          "example_input": "file"
+        }
+      ],
+      "returns": [
+        {
+          "label": "Melody Condition (optional)",
+          "type": {
+            "$defs": {
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              }
+            },
+            "properties": {
+              "path": {
+                "title": "Path",
+                "type": "string"
+              },
+              "url": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Url"
+              },
+              "size": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Size"
+              },
+              "orig_name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Orig Name"
+              },
+              "mime_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Mime Type"
+              },
+              "is_stream": {
+                "default": false,
+                "title": "Is Stream",
+                "type": "boolean"
+              },
+              "meta": {
+                "$ref": "#/$defs/FileDataMeta"
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "title": "FileData",
+            "type": "object",
+            "additional_description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "python_type": {
+            "type": "filepath",
+            "description": ""
+          },
+          "component": "Audio"
+        }
+      ],
+      "description": "Toggle the audio input source between microphone and file upload."
+    },
+    "/video_orientation_change": {
+      "parameters": [
+        {
+          "label": "Video Orientation",
+          "parameter_name": "video_orientation",
+          "parameter_has_default": true,
+          "parameter_default": "Landscape",
+          "type": {
+            "enum": [
+              "Landscape",
+              "Portrait"
+            ],
+            "title": "Radio",
+            "type": "string"
+          },
+          "python_type": {
+            "type": "Literal['Landscape', 'Portrait']",
+            "description": ""
+          },
+          "component": "Radio",
+          "example_input": "Landscape"
+        }
+      ],
+      "returns": [
+        {
+          "label": "Background",
+          "type": {
+            "properties": {
+              "path": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Path to a local file",
+                "title": "Path"
+              },
+              "url": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Publicly available url or base64 encoded image",
+                "title": "Url"
+              },
+              "size": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Size of image in bytes",
+                "title": "Size"
+              },
+              "orig_name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Original filename",
+                "title": "Orig Name"
+              },
+              "mime_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "mime type of image",
+                "title": "Mime Type"
+              },
+              "is_stream": {
+                "default": false,
+                "description": "Can always be set to False",
+                "title": "Is Stream",
+                "type": "boolean"
+              },
+              "meta": {
+                "additionalProperties": true,
+                "default": {
+                  "_type": "gradio.FileData"
+                },
+                "title": "Meta",
+                "type": "object"
+              }
+            },
+            "title": "ImageData",
+            "type": "object",
+            "additional_description": "For input, either path or url must be provided. For output, path is always provided."
+          },
+          "python_type": {
+            "type": "dict(path: str | None (Path to a local file), url: str | None (Publicly available url or base64 encoded image), size: int | None (Size of image in bytes), orig_name: str | None (Original filename), mime_type: str | None (mime type of image), is_stream: bool (Can always be set to False), meta: dict(str, Any))",
+            "description": ""
+          },
+          "component": "Image"
+        }
+      ],
+      "description": "Get the background image path based on video orientation."
+    },
+    "/melody_filepath_change": {
+      "parameters": [
+        {
+          "label": "Melody Condition (optional)",
+          "parameter_name": "melody_filepath",
+          "parameter_has_default": false,
+          "parameter_default": null,
+          "type": {
+            "$defs": {
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              }
+            },
+            "properties": {
+              "path": {
+                "title": "Path",
+                "type": "string"
+              },
+              "url": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Url"
+              },
+              "size": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Size"
+              },
+              "orig_name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Orig Name"
+              },
+              "mime_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Mime Type"
+              },
+              "is_stream": {
+                "default": false,
+                "title": "Is Stream",
+                "type": "boolean"
+              },
+              "meta": {
+                "$ref": "#/$defs/FileDataMeta"
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "title": "FileData",
+            "type": "object",
+            "additional_description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "python_type": {
+            "type": "filepath",
+            "description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "component": "Audio",
+          "example_input": {
+            "path": "https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav",
+            "meta": {
+              "_type": "gradio.FileData"
+            },
+            "orig_name": "audio_sample.wav",
+            "url": "https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav"
+          }
+        },
+        {
+          "label": "Title",
+          "parameter_name": "title",
+          "parameter_has_default": true,
+          "parameter_default": "UnlimitedMusicGen",
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Textbox",
+          "example_input": "Hello!!"
+        },
+        {
+          "label": "AI Model",
+          "parameter_name": "assigned_model",
+          "parameter_has_default": true,
+          "parameter_default": "medium",
+          "type": {
+            "enum": [
+              "melody",
+              "medium",
+              "small",
+              "large",
+              "melody-large",
+              "stereo-small",
+              "stereo-medium",
+              "stereo-large",
+              "stereo-melody",
+              "stereo-melody-large",
+              "style"
+            ],
+            "title": "Radio",
+            "type": "string"
+          },
+          "python_type": {
+            "type": "Literal['melody', 'medium', 'small', 'large', 'melody-large', 'stereo-small', 'stereo-medium', 'stereo-large', 'stereo-melody', 'stereo-melody-large', 'style']",
+            "description": ""
+          },
+          "component": "Radio",
+          "example_input": "melody"
+        },
+        {
+          "label": "Top-p",
+          "parameter_name": "topp",
+          "parameter_has_default": true,
+          "parameter_default": 1150,
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Number",
+          "example_input": 3
+        },
+        {
+          "label": "Randomness Temperature",
+          "parameter_name": "temperature",
+          "parameter_has_default": true,
+          "parameter_default": 0.7,
+          "type": {
+            "type": "number"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Number",
+          "example_input": 3
+        },
+        {
+          "label": "Classifier Free Guidance",
+          "parameter_name": "cfg_coef",
+          "parameter_has_default": true,
+          "parameter_default": 3.75,
+          "type": {
+            "type": "number"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Number",
+          "example_input": 3
+        },
+        {
+          "label": "Music Generation Segment Length (s)",
+          "parameter_name": "segment_length",
+          "parameter_has_default": true,
+          "parameter_default": 30,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 10 and 30"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 10
+        }
+      ],
+      "returns": [
+        {
+          "label": "Title",
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Textbox"
+        },
+        {
+          "label": "Melody Condition Sample Segment",
+          "type": {
+            "type": "number",
+            "description": "numeric value between -1 and 0"
+          },
+          "python_type": {
+            "type": "float",
+            "description": "numeric value between -1 and 0"
+          },
+          "component": "Slider"
+        },
+        {
+          "label": "AI Model",
+          "type": {
+            "enum": [
+              "melody",
+              "medium",
+              "small",
+              "large",
+              "melody-large",
+              "stereo-small",
+              "stereo-medium",
+              "stereo-large",
+              "stereo-melody",
+              "stereo-melody-large",
+              "style"
+            ],
+            "title": "Radio",
+            "type": "string"
+          },
+          "python_type": {
+            "type": "Literal['melody', 'medium', 'small', 'large', 'melody-large', 'stereo-small', 'stereo-medium', 'stereo-large', 'stereo-melody', 'stereo-melody-large', 'style']",
+            "description": ""
+          },
+          "component": "Radio"
+        },
+        {
+          "label": "Top-p",
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Number"
+        },
+        {
+          "label": "Randomness Temperature",
+          "type": {
+            "type": "number"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Number"
+        },
+        {
+          "label": "Classifier Free Guidance",
+          "type": {
+            "type": "number"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Number"
+        },
+        {
+          "label": "Segment Overlap",
+          "type": {
+            "type": "number",
+            "description": "numeric value between 0 and 14"
+          },
+          "python_type": {
+            "type": "float",
+            "description": "numeric value between 0 and 14"
+          },
+          "component": "Slider"
+        }
+      ],
+      "description": "Update melody-related UI fields based on the selected melody file and settings."
+    },
+    "/reuse_seed_click": {
+      "parameters": [
+        {
+          "label": "Seed used",
+          "parameter_name": "x",
+          "parameter_has_default": true,
+          "parameter_default": -1,
+          "type": {
+            "type": "number"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Number",
+          "example_input": 3
+        }
+      ],
+      "returns": [
+        {
+          "label": "Seed",
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Number"
+        }
+      ],
+      "description": ""
+    },
+    "/autoplay_cb_change": {
+      "parameters": [
+        {
+          "label": "Autoplay?",
+          "parameter_name": "x",
+          "parameter_has_default": true,
+          "parameter_default": false,
+          "type": {
+            "type": "boolean"
+          },
+          "python_type": {
+            "type": "bool",
+            "description": ""
+          },
+          "component": "Checkbox",
+          "example_input": true
+        }
+      ],
+      "returns": [
+        {
+          "label": "Generated Music",
+          "type": {
+            "$defs": {
+              "FileData": {
+                "description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed).",
+                "properties": {
+                  "path": {
+                    "title": "Path",
+                    "type": "string"
+                  },
+                  "url": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Url"
+                  },
+                  "size": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Size"
+                  },
+                  "orig_name": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Orig Name"
+                  },
+                  "mime_type": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Mime Type"
+                  },
+                  "is_stream": {
+                    "default": false,
+                    "title": "Is Stream",
+                    "type": "boolean"
+                  },
+                  "meta": {
+                    "$ref": "#/$defs/FileDataMeta"
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "title": "FileData",
+                "type": "object"
+              },
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              }
+            },
+            "properties": {
+              "video": {
+                "$ref": "#/$defs/FileData"
+              },
+              "subtitles": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/FileData"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null
+              }
+            },
+            "required": [
+              "video"
+            ],
+            "title": "VideoData",
+            "type": "object",
+            "additional_description": null
+          },
+          "python_type": {
+            "type": "dict(video: filepath, subtitles: filepath | None)",
+            "description": ""
+          },
+          "component": "Video"
+        }
+      ],
+      "description": ""
+    },
+    "/segment_length_change": {
+      "parameters": [
+        {
+          "label": "Melody Condition (optional)",
+          "parameter_name": "melody_filepath",
+          "parameter_has_default": false,
+          "parameter_default": null,
+          "type": {
+            "$defs": {
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              }
+            },
+            "properties": {
+              "path": {
+                "title": "Path",
+                "type": "string"
+              },
+              "url": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Url"
+              },
+              "size": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Size"
+              },
+              "orig_name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Orig Name"
+              },
+              "mime_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Mime Type"
+              },
+              "is_stream": {
+                "default": false,
+                "title": "Is Stream",
+                "type": "boolean"
+              },
+              "meta": {
+                "$ref": "#/$defs/FileDataMeta"
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "title": "FileData",
+            "type": "object",
+            "additional_description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "python_type": {
+            "type": "filepath",
+            "description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "component": "Audio",
+          "example_input": {
+            "path": "https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav",
+            "meta": {
+              "_type": "gradio.FileData"
+            },
+            "orig_name": "audio_sample.wav",
+            "url": "https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav"
+          }
+        },
+        {
+          "label": "Title",
+          "parameter_name": "title",
+          "parameter_has_default": true,
+          "parameter_default": "UnlimitedMusicGen",
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Textbox",
+          "example_input": "Hello!!"
+        },
+        {
+          "label": "AI Model",
+          "parameter_name": "assigned_model",
+          "parameter_has_default": true,
+          "parameter_default": "medium",
+          "type": {
+            "enum": [
+              "melody",
+              "medium",
+              "small",
+              "large",
+              "melody-large",
+              "stereo-small",
+              "stereo-medium",
+              "stereo-large",
+              "stereo-melody",
+              "stereo-melody-large",
+              "style"
+            ],
+            "title": "Radio",
+            "type": "string"
+          },
+          "python_type": {
+            "type": "Literal['melody', 'medium', 'small', 'large', 'melody-large', 'stereo-small', 'stereo-medium', 'stereo-large', 'stereo-melody', 'stereo-melody-large', 'style']",
+            "description": ""
+          },
+          "component": "Radio",
+          "example_input": "melody"
+        },
+        {
+          "label": "Top-p",
+          "parameter_name": "topp",
+          "parameter_has_default": true,
+          "parameter_default": 1150,
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Number",
+          "example_input": 3
+        },
+        {
+          "label": "Randomness Temperature",
+          "parameter_name": "temperature",
+          "parameter_has_default": true,
+          "parameter_default": 0.7,
+          "type": {
+            "type": "number"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Number",
+          "example_input": 3
+        },
+        {
+          "label": "Classifier Free Guidance",
+          "parameter_name": "cfg_coef",
+          "parameter_has_default": true,
+          "parameter_default": 3.75,
+          "type": {
+            "type": "number"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Number",
+          "example_input": 3
+        },
+        {
+          "label": "Music Generation Segment Length (s)",
+          "parameter_name": "segment_length",
+          "parameter_has_default": true,
+          "parameter_default": 30,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 10 and 30"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 10
+        }
+      ],
+      "returns": [
+        {
+          "label": "Title",
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Textbox"
+        },
+        {
+          "label": "Melody Condition Sample Segment",
+          "type": {
+            "type": "number",
+            "description": "numeric value between -1 and 0"
+          },
+          "python_type": {
+            "type": "float",
+            "description": "numeric value between -1 and 0"
+          },
+          "component": "Slider"
+        },
+        {
+          "label": "AI Model",
+          "type": {
+            "enum": [
+              "melody",
+              "medium",
+              "small",
+              "large",
+              "melody-large",
+              "stereo-small",
+              "stereo-medium",
+              "stereo-large",
+              "stereo-melody",
+              "stereo-melody-large",
+              "style"
+            ],
+            "title": "Radio",
+            "type": "string"
+          },
+          "python_type": {
+            "type": "Literal['melody', 'medium', 'small', 'large', 'melody-large', 'stereo-small', 'stereo-medium', 'stereo-large', 'stereo-melody', 'stereo-melody-large', 'style']",
+            "description": ""
+          },
+          "component": "Radio"
+        },
+        {
+          "label": "Top-p",
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Number"
+        },
+        {
+          "label": "Randomness Temperature",
+          "type": {
+            "type": "number"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Number"
+        },
+        {
+          "label": "Classifier Free Guidance",
+          "type": {
+            "type": "number"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Number"
+        },
+        {
+          "label": "Segment Overlap",
+          "type": {
+            "type": "number",
+            "description": "numeric value between 0 and 14"
+          },
+          "python_type": {
+            "type": "float",
+            "description": "numeric value between 0 and 14"
+          },
+          "component": "Slider"
+        }
+      ],
+      "description": "Update melody-related UI fields based on the selected melody file and settings."
+    },
+    "/_fetch_user_history": {
+      "parameters": [],
+      "returns": [
+        {
+          "label": "Past images",
+          "type": {
+            "$defs": {
+              "FileData": {
+                "description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed).",
+                "properties": {
+                  "path": {
+                    "title": "Path",
+                    "type": "string"
+                  },
+                  "url": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Url"
+                  },
+                  "size": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Size"
+                  },
+                  "orig_name": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Orig Name"
+                  },
+                  "mime_type": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Mime Type"
+                  },
+                  "is_stream": {
+                    "default": false,
+                    "title": "Is Stream",
+                    "type": "boolean"
+                  },
+                  "meta": {
+                    "$ref": "#/$defs/FileDataMeta"
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "title": "FileData",
+                "type": "object"
+              },
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              },
+              "GalleryImage": {
+                "properties": {
+                  "image": {
+                    "$ref": "#/$defs/ImageData"
+                  },
+                  "caption": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Caption"
+                  }
+                },
+                "required": [
+                  "image"
+                ],
+                "title": "GalleryImage",
+                "type": "object"
+              },
+              "GalleryVideo": {
+                "properties": {
+                  "video": {
+                    "$ref": "#/$defs/FileData"
+                  },
+                  "caption": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Caption"
+                  }
+                },
+                "required": [
+                  "video"
+                ],
+                "title": "GalleryVideo",
+                "type": "object"
+              },
+              "ImageData": {
+                "description": "For input, either path or url must be provided. For output, path is always provided.",
+                "properties": {
+                  "path": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Path to a local file",
+                    "title": "Path"
+                  },
+                  "url": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Publicly available url or base64 encoded image",
+                    "title": "Url"
+                  },
+                  "size": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Size of image in bytes",
+                    "title": "Size"
+                  },
+                  "orig_name": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Original filename",
+                    "title": "Orig Name"
+                  },
+                  "mime_type": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "mime type of image",
+                    "title": "Mime Type"
+                  },
+                  "is_stream": {
+                    "default": false,
+                    "description": "Can always be set to False",
+                    "title": "Is Stream",
+                    "type": "boolean"
+                  },
+                  "meta": {
+                    "additionalProperties": true,
+                    "default": {
+                      "_type": "gradio.FileData"
+                    },
+                    "title": "Meta",
+                    "type": "object"
+                  }
+                },
+                "title": "ImageData",
+                "type": "object"
+              }
+            },
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/GalleryImage"
+                },
+                {
+                  "$ref": "#/$defs/GalleryVideo"
+                }
+              ]
+            },
+            "title": "GalleryData",
+            "type": "array",
+            "additional_description": null
+          },
+          "python_type": {
+            "type": "list[dict(image: dict(path: str | None (Path to a local file), url: str | None (Publicly available url or base64 encoded image), size: int | None (Size of image in bytes), orig_name: str | None (Original filename), mime_type: str | None (mime type of image), is_stream: bool (Can always be set to False), meta: dict(str, Any)), caption: str | None) | dict(video: filepath, caption: str | None)]",
+            "description": ""
+          },
+          "component": "Gallery"
+        }
+      ],
+      "description": "Return saved history for the given user."
+    },
+    "/_export_user_history": {
+      "parameters": [],
+      "returns": [
+        {
+          "label": "Exported history",
+          "type": {
+            "$defs": {
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              }
+            },
+            "properties": {
+              "path": {
+                "title": "Path",
+                "type": "string"
+              },
+              "url": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Url"
+              },
+              "size": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Size"
+              },
+              "orig_name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Orig Name"
+              },
+              "mime_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Mime Type"
+              },
+              "is_stream": {
+                "default": false,
+                "title": "Is Stream",
+                "type": "boolean"
+              },
+              "meta": {
+                "$ref": "#/$defs/FileDataMeta"
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "title": "FileData",
+            "type": "object",
+            "additional_description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "python_type": {
+            "type": "filepath",
+            "description": ""
+          },
+          "component": "File"
+        }
+      ],
+      "description": "Zip all history for the given user, if it exists, and return it as a downloadable file."
+    },
+    "/lambda_1": {
+      "parameters": [],
+      "returns": [],
+      "description": ""
+    },
+    "/lambda_2": {
+      "parameters": [],
+      "returns": [],
+      "description": ""
+    },
+    "/_delete_user_history": {
+      "parameters": [],
+      "returns": [],
+      "description": "Delete all history for the given user."
+    },
+    "/lambda_3": {
+      "parameters": [],
+      "returns": [],
+      "description": ""
+    },
+    "/submit": {
+      "parameters": [],
+      "returns": [],
+      "description": "Retrieve the currently logged-in user's profile. This function returns the user profile stored in the global Gradio state. If no user is logged in, it returns None."
+    },
+    "/ping": {
+      "parameters": [],
+      "returns": [],
+      "description": "return the value true"
+    },
+    "/predict_simple": {
+      "parameters": [
+        {
+          "label": "1st",
+          "parameter_name": "model",
+          "parameter_has_default": false,
+          "parameter_default": null,
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": "..."
+        },
+        {
+          "label": "2nd",
+          "parameter_name": "text",
+          "parameter_has_default": false,
+          "parameter_default": null,
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": "..."
+        },
+        {
+          "label": "3rd",
+          "parameter_name": "melody_filepath",
+          "parameter_has_default": true,
+          "parameter_default": null,
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": "..."
+        },
+        {
+          "label": "4th",
+          "parameter_name": "duration",
+          "parameter_has_default": true,
+          "parameter_default": 10,
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": 10
+        },
+        {
+          "label": "5th",
+          "parameter_name": "dimension",
+          "parameter_has_default": true,
+          "parameter_default": 2,
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": 2
+        },
+        {
+          "label": "6th",
+          "parameter_name": "topk",
+          "parameter_has_default": true,
+          "parameter_default": 200,
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": 200
+        },
+        {
+          "label": "7th",
+          "parameter_name": "topp",
+          "parameter_has_default": true,
+          "parameter_default": 0.01,
+          "type": {
+            "type": "number"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": 0.01
+        },
+        {
+          "label": "8th",
+          "parameter_name": "temperature",
+          "parameter_has_default": true,
+          "parameter_default": 1.0,
+          "type": {
+            "type": "number"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": 1.0
+        },
+        {
+          "label": "9th",
+          "parameter_name": "cfg_coef",
+          "parameter_has_default": true,
+          "parameter_default": 4.0,
+          "type": {
+            "type": "number"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": 4.0
+        },
+        {
+          "label": "10th",
+          "parameter_name": "background",
+          "parameter_has_default": true,
+          "parameter_default": "./assets/background.png",
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": "./assets/background.png"
+        },
+        {
+          "label": "11th",
+          "parameter_name": "title",
+          "parameter_has_default": true,
+          "parameter_default": "UnlimitedMusicGen",
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": "UnlimitedMusicGen"
+        },
+        {
+          "label": "12th",
+          "parameter_name": "settings_font",
+          "parameter_has_default": true,
+          "parameter_default": "./assets/arial.ttf",
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": "./assets/arial.ttf"
+        },
+        {
+          "label": "13th",
+          "parameter_name": "settings_font_color",
+          "parameter_has_default": true,
+          "parameter_default": "#c87f05",
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": "#c87f05"
+        },
+        {
+          "label": "14th",
+          "parameter_name": "seed",
+          "parameter_has_default": true,
+          "parameter_default": -1,
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": -1
+        },
+        {
+          "label": "15th",
+          "parameter_name": "overlap",
+          "parameter_has_default": true,
+          "parameter_default": 1,
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": 1
+        },
+        {
+          "label": "16th",
+          "parameter_name": "prompt_index",
+          "parameter_has_default": true,
+          "parameter_default": -1,
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": -1
+        },
+        {
+          "label": "17th",
+          "parameter_name": "include_title",
+          "parameter_has_default": true,
+          "parameter_default": true,
+          "type": {
+            "type": "boolean"
+          },
+          "python_type": {
+            "type": "bool",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": true
+        },
+        {
+          "label": "18th",
+          "parameter_name": "include_settings",
+          "parameter_has_default": true,
+          "parameter_default": true,
+          "type": {
+            "type": "boolean"
+          },
+          "python_type": {
+            "type": "bool",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": true
+        },
+        {
+          "label": "19th",
+          "parameter_name": "harmony_only",
+          "parameter_has_default": true,
+          "parameter_default": false,
+          "type": {
+            "type": "boolean"
+          },
+          "python_type": {
+            "type": "bool",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": false
+        },
+        {
+          "label": "20th",
+          "parameter_name": "profile",
+          "parameter_has_default": true,
+          "parameter_default": "Satoshi Nakamoto",
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": "Satoshi Nakamoto"
+        },
+        {
+          "label": "21st",
+          "parameter_name": "segment_length",
+          "parameter_has_default": true,
+          "parameter_default": 30,
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": 30
+        },
+        {
+          "label": "22nd",
+          "parameter_name": "settings_font_size",
+          "parameter_has_default": true,
+          "parameter_default": 28,
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": 28
+        },
+        {
+          "label": "23rd",
+          "parameter_name": "settings_animate_waveform",
+          "parameter_has_default": true,
+          "parameter_default": false,
+          "type": {
+            "type": "boolean"
+          },
+          "python_type": {
+            "type": "bool",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": false
+        },
+        {
+          "label": "24th",
+          "parameter_name": "video_orientation",
+          "parameter_has_default": true,
+          "parameter_default": "Landscape",
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": "Landscape"
+        },
+        {
+          "label": "25th",
+          "parameter_name": "return_history_json",
+          "parameter_has_default": true,
+          "parameter_default": false,
+          "type": {
+            "type": "boolean"
+          },
+          "python_type": {
+            "type": "bool",
+            "description": ""
+          },
+          "component": "Api",
+          "example_input": false
+        }
+      ],
+      "returns": [
+        {
+          "label": "1st",
+          "type": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "minItems": 3,
+              "maxItems": 3
+            }
+          },
+          "python_type": {
+            "type": "tuple[str, str, str]",
+            "description": ""
+          },
+          "component": "Api"
+        }
+      ],
+      "description": "Generate music and video based on the provided parameters and model."
+    },
+    "/_check_login_status": {
+      "parameters": [],
+      "returns": [],
+      "description": ""
+    },
+    "/_fetch_user_history_1": {
+      "parameters": [],
+      "returns": [
+        {
+          "label": "Past images",
+          "type": {
+            "$defs": {
+              "FileData": {
+                "description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed).",
+                "properties": {
+                  "path": {
+                    "title": "Path",
+                    "type": "string"
+                  },
+                  "url": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Url"
+                  },
+                  "size": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Size"
+                  },
+                  "orig_name": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Orig Name"
+                  },
+                  "mime_type": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Mime Type"
+                  },
+                  "is_stream": {
+                    "default": false,
+                    "title": "Is Stream",
+                    "type": "boolean"
+                  },
+                  "meta": {
+                    "$ref": "#/$defs/FileDataMeta"
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "title": "FileData",
+                "type": "object"
+              },
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              },
+              "GalleryImage": {
+                "properties": {
+                  "image": {
+                    "$ref": "#/$defs/ImageData"
+                  },
+                  "caption": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Caption"
+                  }
+                },
+                "required": [
+                  "image"
+                ],
+                "title": "GalleryImage",
+                "type": "object"
+              },
+              "GalleryVideo": {
+                "properties": {
+                  "video": {
+                    "$ref": "#/$defs/FileData"
+                  },
+                  "caption": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Caption"
+                  }
+                },
+                "required": [
+                  "video"
+                ],
+                "title": "GalleryVideo",
+                "type": "object"
+              },
+              "ImageData": {
+                "description": "For input, either path or url must be provided. For output, path is always provided.",
+                "properties": {
+                  "path": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Path to a local file",
+                    "title": "Path"
+                  },
+                  "url": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Publicly available url or base64 encoded image",
+                    "title": "Url"
+                  },
+                  "size": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Size of image in bytes",
+                    "title": "Size"
+                  },
+                  "orig_name": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Original filename",
+                    "title": "Orig Name"
+                  },
+                  "mime_type": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "mime type of image",
+                    "title": "Mime Type"
+                  },
+                  "is_stream": {
+                    "default": false,
+                    "description": "Can always be set to False",
+                    "title": "Is Stream",
+                    "type": "boolean"
+                  },
+                  "meta": {
+                    "additionalProperties": true,
+                    "default": {
+                      "_type": "gradio.FileData"
+                    },
+                    "title": "Meta",
+                    "type": "object"
+                  }
+                },
+                "title": "ImageData",
+                "type": "object"
+              }
+            },
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/GalleryImage"
+                },
+                {
+                  "$ref": "#/$defs/GalleryVideo"
+                }
+              ]
+            },
+            "title": "GalleryData",
+            "type": "array",
+            "additional_description": null
+          },
+          "python_type": {
+            "type": "list[dict(image: dict(path: str | None (Path to a local file), url: str | None (Publicly available url or base64 encoded image), size: int | None (Size of image in bytes), orig_name: str | None (Original filename), mime_type: str | None (mime type of image), is_stream: bool (Can always be set to False), meta: dict(str, Any)), caption: str | None) | dict(video: filepath, caption: str | None)]",
+            "description": ""
+          },
+          "component": "Gallery"
+        }
+      ],
+      "description": "Return saved history for the given user."
+    },
+    "/_inner": {
+      "parameters": [],
+      "returns": [
+        {
+          "label": "value_81",
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Markdown"
+        }
+      ],
+      "description": ""
+    }
+  },
+  "unnamed_endpoints": {}
+}

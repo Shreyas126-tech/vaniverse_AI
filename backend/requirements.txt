@@ -13,3 +13,4 @@ deep-translator
 # openai-whisper
 gradio_client
 httpx
+python-dotenv
