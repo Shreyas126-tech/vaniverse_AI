@@ -33,11 +33,12 @@ class AIModelService:
 
         try:
             # Using the verified API structure for sanchit-gandhi/musicgen-streaming
+            # Note: seed must be <= 10, and audio_length_in_s capped at 10 for public use usually
             result = self.music_client.predict(
                 text_prompt=prompt,
-                audio_length_in_s=15,
+                audio_length_in_s=10,
                 play_steps_in_s=1.5,
-                seed=42,
+                seed=5,
                 api_name="/generate_audio"
             )
             return result
