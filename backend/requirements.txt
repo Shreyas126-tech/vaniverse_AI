@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+python-multipart
+pydantic
+pydantic-settings
+# torch
+# torchaudio
+# audiocraft
+numpy
+librosa
+soundfile
+deep-translator
+# openai-whisper
+gradio_client
+httpx
